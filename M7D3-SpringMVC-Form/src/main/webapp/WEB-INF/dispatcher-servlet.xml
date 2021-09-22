@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Definition des namespaces -->
+<!-- Bean, contex et transaction(tx) -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-4.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+  
+	<!-- Je vais travailler avec des annotations dans les packages suivant -->
+	<context:annotation-config/>
+	<context:component-scan base-package="fr.eni.mvc.controller"/>
+  
+	<!-- Quand le controller recevra une chaine de caractère SpringMVC devra la renvoyer et faire une concaténation 
+	avec les property prefix+''+suffix -->
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.UrlBasedViewResolver" >
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="pers1" class="fr.eni.mvc.bean.Personne">
+		<property name="nom" value="Mérad" />
+		<property name="prenom" value="Elizabeth" />
+		<property name="adresse" >
+			<bean class="fr.eni.mvc.bean.Adresse">
+				<property name="codePostal" value="38250" />
+				<property name="Ville" value="Villard-de-Lans" />
+			</bean>
+		</property>
+	</bean>
+	<bean id="pers2" class="fr.eni.mvc.bean.Personne">
+		<property name="nom" value="Bouchouareb" />
+		<property name="prenom" value="Daoudi" />
+		<property name="adresse" >
+			<bean class="fr.eni.mvc.bean.Adresse">
+				<property name="codePostal" value="16000" />
+				<property name="Ville" value="Alger" />
+			</bean>
+		</property>
+	</bean>
+
+</beans>
